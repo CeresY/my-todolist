@@ -17,3 +17,14 @@ export const inputStyle:CSSProperties = {
     border: '1px solid #ccc',
     borderRadius: '5px'
 }
+
+export const centerDiv: CSSProperties = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: '600px',
+    height: '500px',
+    border: '1px solid grey',
+    padding: '10px'
+}

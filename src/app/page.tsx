@@ -4,17 +4,7 @@ import TodoList from "@/components/TodoList";
 import TodoFilter from "@/components/TodoFilter";
 import {CSSProperties, useState} from "react";
 import {Todo} from "@/types";
-
-const currentDiv: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '600px',
-    height: '500px',
-    border: '1px solid grey',
-    padding: '10px'
-}
+import {centerDiv} from "@/styles"
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -56,7 +46,7 @@ export default function Home() {
     }
 
   return (
-        <div style={currentDiv}>
+        <div style={centerDiv}>
           <h1>TodoList</h1>
           <AddTodo addTodo={addTodo}></AddTodo>
           <TodoList todos={getFilteredTodos()} deleteTodo={deleteTodo} toggleTodo={toggleTodo}></TodoList>
