@@ -144,21 +144,59 @@ export const headingStyle: CSSProperties = {
 export const tabButtonStyle: CSSProperties = {
     backgroundColor: lightColors.surface,
     border: `1px solid ${lightColors.border}`,
-    padding: '12px 24px',
+    padding: '12px 20px',
     cursor: 'pointer',
     borderRadius: '8px 8px 0 0',
-    marginRight: '4px',
+    marginRight: '2px',
     fontSize: '14px',
     fontWeight: '500',
     color: lightColors.text,
-    transition: 'all 0.2s ease'
+    transition: 'all 0.2s ease',
+    position: 'relative',
+    overflow: 'hidden'
 }
 
 export const activeTabButtonStyle: CSSProperties = {
     ...tabButtonStyle,
     backgroundColor: lightColors.primary,
     color: 'white',
-    borderColor: lightColors.primary
+    borderColor: lightColors.primary,
+    boxShadow: '0 2px 4px rgba(59, 130, 246, 0.2)',
+    transform: 'translateY(-1px)'
+}
+
+// 新增简洁列表样式
+export const compactMemoItemStyle: CSSProperties = {
+    backgroundColor: 'white',
+    border: `1px solid ${lightColors.border}`,
+    borderRadius: '8px',
+    padding: '12px',
+    marginBottom: '8px',
+    fontSize: '14px',
+    transition: 'all 0.2s ease',
+    cursor: 'pointer'
+}
+
+export const compactMemoTitleStyle: CSSProperties = {
+    fontWeight: '600',
+    marginBottom: '4px',
+    color: lightColors.text,
+    fontSize: '14px'
+}
+
+export const compactMemoContentStyle: CSSProperties = {
+    color: lightColors.textSecondary,
+    fontSize: '13px',
+    lineHeight: '1.4',
+    marginBottom: '8px'
+}
+
+export const compactMemoMetaStyle: CSSProperties = {
+    fontSize: '12px',
+    color: lightColors.textMuted,
+    display: 'flex',
+    justifyContent: 'space-between',
+    alignItems: 'center'
 }
 
 // 新增展示区域样式
