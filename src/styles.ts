@@ -160,3 +160,43 @@ export const activeTabButtonStyle: CSSProperties = {
     color: 'white',
     borderColor: lightColors.primary
 }
+
+// 新增展示区域样式
+export const memoDisplayAreaStyle: CSSProperties = {
+    backgroundColor: lightColors.surface,
+    border: `1px solid ${lightColors.border}`,
+    borderRadius: '10px',
+    padding: '16px',
+    marginTop: '16px',
+    maxHeight: '420px',
+    minHeight: '300px',
+    overflowY: 'auto',
+    position: 'relative'
+}
+
+export const memoListContainerStyle: CSSProperties = {
+    paddingRight: '8px'
+}
+
+export const scrollIndicatorStyle: CSSProperties = {
+    position: 'sticky',
+    top: '-16px',
+    left: '0',
+    right: '0',
+    height: '4px',
+    background: 'linear-gradient(to right, rgba(59, 130, 246, 0.3), rgba(59, 130, 246, 0.1))',
+    borderRadius: '2px',
+    marginBottom: '12px',
+    zIndex: 1
+}
+
+export const memoCountBadgeStyle: CSSProperties = {
+    backgroundColor: lightColors.primary,
+    color: 'white',
+    padding: '4px 8px',
+    borderRadius: '12px',
+    fontSize: '12px',
+    fontWeight: '600',
+    marginLeft: '8px',
+    display: 'inline-block'
+}

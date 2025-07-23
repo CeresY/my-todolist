@@ -3,11 +3,11 @@ import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 import TodoFilter from "@/components/TodoFilter";
 import AddMemo from "@/components/AddMemo";
-import MemoList from "@/components/MemoList";
+import MemoDisplayArea from "@/components/MemoDisplayArea";
 import MemoFilter from "@/components/MemoFilter";
 import {CSSProperties, useState, useEffect} from "react";
 import {Todo, Memo} from "@/types";
-import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle} from "@/styles";
+import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle, memoCountBadgeStyle} from "@/styles";
 import {saveTodos, loadTodos, saveMemos, loadMemos} from "@/utils/storage";
 import {filterMemosBySearch, filterMemosByPriority, filterMemosByTag, getAllTags} from "@/utils/memoUtils";
 
@@ -95,9 +95,11 @@ export default function Home() {
 
   const containerStyle = {
     ...centerDiv,
-    width: '900px',
-    height: '700px'
+    width: '1000px',
+    height: '750px'
   }
+
+  const filteredMemos = getFilteredMemos()
 
   return (
         <div style={containerStyle}>
@@ -107,12 +109,18 @@ export default function Home() {
               style={activeTab === 'todos' ? activeTabButtonStyle : tabButtonStyle}
             >
               待办事项
+              {todos.length > 0 && (
+                <span style={memoCountBadgeStyle}>{todos.length}</span>
+              )}
             </button>
             <button 
               onClick={() => setActiveTab('memos')}
               style={activeTab === 'memos' ? activeTabButtonStyle : tabButtonStyle}
             >
               备忘录
+              {memos.length > 0 && (
+                <span style={memoCountBadgeStyle}>{memos.length}</span>
+              )}
             </button>
           </div>
           
@@ -125,8 +133,21 @@ export default function Home() {
             </div>
           ) : (
             <div>
-              <h1 style={headingStyle}>备忘录</h1>
+              <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
+                <h1 style={{ ...headingStyle, marginBottom: '0' }}>备忘录</h1>
+                {memos.length > 0 && (
+                  <span style={{ 
+                    ...memoCountBadgeStyle, 
+                    backgroundColor: '#10b981',
+                    marginLeft: '12px' 
+                  }}>
+                    {filteredMemos.length}/{memos.length}
+                  </span>
+                )}
+              </div>
+              
               <AddMemo onAddMemo={addMemo} />
+              
               <MemoFilter
                 searchTerm={memoSearchTerm}
                 onSearchChange={setMemoSearchTerm}
@@ -136,13 +157,14 @@ export default function Home() {
                 onTagFilterChange={setMemoTagFilter}
                 availableTags={availableTags}
               />
-              <div style={{ maxHeight: '380px', overflowY: 'auto', paddingRight: '4px' }}>
-                <MemoList
-                  memos={getFilteredMemos()}
-                  onUpdateMemo={updateMemo}
-                  onDeleteMemo={deleteMemo}
-                />
-              </div>
+              
+              <MemoDisplayArea
+                memos={filteredMemos}
+                onUpdateMemo={updateMemo}
+                onDeleteMemo={deleteMemo}
+                totalCount={memos.length}
+                filteredCount={filteredMemos.length}
+              />
             </div>
           )}
         </div>
