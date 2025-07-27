@@ -48,17 +48,13 @@ export const inputStyle: CSSProperties = {
 }
 
 export const centerDiv: CSSProperties = {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    width: '600px',
-    height: '500px',
+    margin: '20px',
     border: `1px solid ${lightColors.border}`,
     borderRadius: '12px',
     padding: '24px',
     backgroundColor: lightColors.background,
-    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)'
+    boxShadow: '0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06)',
+    boxSizing: 'border-box'
 }
 
 export const textareaStyle: CSSProperties = {

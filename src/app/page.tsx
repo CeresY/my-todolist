@@ -95,8 +95,10 @@ export default function Home() {
 
   const containerStyle = {
     ...centerDiv,
-    width: '1000px',
-    height: '750px'
+    width: 'calc(100vw - 40px)',
+    height: 'calc(100vh - 40px)',
+    maxWidth: 'none',
+    maxHeight: 'none'
   }
 
   const filteredMemos = getFilteredMemos()
