@@ -3,6 +3,7 @@
 import React from 'react';
 import { Memo } from '@/types';
 import MemoItem from './MemoItem';
+import MemoList from './MemoList';
 import { memoDisplayAreaStyle, memoListContainerStyle, scrollIndicatorStyle } from '@/styles';
 
 interface MemoDisplayAreaProps {
@@ -59,27 +60,30 @@ export default function MemoDisplayArea({
   }
 
   return (
-    <div style={memoDisplayAreaStyle}>
+    <div style={{
+      ...memoDisplayAreaStyle,
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%'
+    }}>
       {/* 滚动指示器 */}
       {hasScroll && (
         <div style={scrollIndicatorStyle} />
       )}
       
       {/* 备忘录列表 */}
-      <div style={memoListContainerStyle}>
-        {memos.map((memo, index) => (
-          <div key={memo.id} style={{ 
-            animationDelay: `${index * 50}ms`,
-            animation: 'fadeInUp 0.3s ease forwards',
-            opacity: 0
-          }}>
-            <MemoItem
-              memo={memo}
-              onUpdateMemo={onUpdateMemo}
-              onDeleteMemo={onDeleteMemo}
-            />
-          </div>
-        ))}
+      <div style={{
+        ...memoListContainerStyle,
+        flex: 1,
+        display: 'flex',
+        flexDirection: 'column',
+        overflow: 'auto' // 允许滚动
+      }}>
+        <MemoList
+          memos={memos}
+          onUpdateMemo={onUpdateMemo}
+          onDeleteMemo={onDeleteMemo}
+        />
       </div>
       
       {/* 底部统计信息 */}

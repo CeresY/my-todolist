@@ -93,12 +93,15 @@ export default function Home() {
     
     const availableTags = getAllTags(memos)
 
-  const containerStyle = {
+  const containerStyle: CSSProperties = {
     ...centerDiv,
     width: 'calc(100vw - 40px)',
     height: 'calc(100vh - 40px)',
     maxWidth: 'none',
-    maxHeight: 'none'
+    maxHeight: 'none',
+    display: 'flex',
+    flexDirection: 'column' as const,
+    overflow: 'auto'
   }
 
   const filteredMemos = getFilteredMemos()
@@ -150,14 +153,19 @@ export default function Home() {
           )}
           
           {activeTab === 'memos' && (
-            <div>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              flex: 1
+            }}>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
                 <h1 style={{ ...headingStyle, marginBottom: '0' }}>备忘录管理</h1>
                 {memos.length > 0 && (
-                  <span style={{ 
-                    ...memoCountBadgeStyle, 
+                  <span style={{
+                    ...memoCountBadgeStyle,
                     backgroundColor: '#10b981',
-                    marginLeft: '12px' 
+                    marginLeft: '12px'
                   }}>
                     {memos.length} 个备忘录
                   </span>
@@ -176,9 +184,11 @@ export default function Home() {
                 availableTags={availableTags}
               />
               
-              <div style={{ 
-                maxHeight: '380px', 
-                overflowY: 'auto', 
+              <div style={{
+                flex: 1,
+                display: 'flex',
+                flexDirection: 'column',
+                overflowY: 'auto',
                 paddingRight: '4px',
                 backgroundColor: '#f8fafc',
                 border: '1px solid #e2e8f0',
@@ -188,8 +198,8 @@ export default function Home() {
               }}>
                 {filteredMemos.length > 0 ? (
                   filteredMemos.map(memo => (
-                    <div 
-                      key={memo.id} 
+                    <div
+                      key={memo.id}
                       style={compactMemoItemStyle}
                       onMouseEnter={(e) => {
                         e.currentTarget.style.transform = 'translateY(-1px)';
@@ -228,11 +238,11 @@ export default function Home() {
                         </span>
                         <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
                           <span style={{
-                            color: memo.priority === 'high' ? '#ef4444' : 
+                            color: memo.priority === 'high' ? '#ef4444' :
                                    memo.priority === 'medium' ? '#f59e0b' : '#9ca3af',
                             fontWeight: '500'
                           }}>
-                            {memo.priority === 'high' ? '高' : 
+                            {memo.priority === 'high' ? '高' :
                              memo.priority === 'medium' ? '中' : '低'}
                           </span>
                           <span>{memo.createdAt.toLocaleDateString()}</span>
@@ -241,9 +251,9 @@ export default function Home() {
                     </div>
                   ))
                 ) : (
-                  <div style={{ 
-                    textAlign: 'center', 
-                    color: '#6b7280', 
+                  <div style={{
+                    textAlign: 'center',
+                    color: '#6b7280',
                     padding: '60px 20px',
                     fontSize: '16px'
                   }}>
@@ -259,14 +269,19 @@ export default function Home() {
           )}
           
           {activeTab === 'memoDisplay' && (
-            <div>
+            <div style={{
+              display: 'flex',
+              flexDirection: 'column',
+              height: '100%',
+              flex: 1
+            }}>
               <div style={{ display: 'flex', alignItems: 'center', marginBottom: '20px' }}>
                 <h1 style={{ ...headingStyle, marginBottom: '0' }}>备忘录展示</h1>
                 {memos.length > 0 && (
-                  <span style={{ 
-                    ...memoCountBadgeStyle, 
+                  <span style={{
+                    ...memoCountBadgeStyle,
                     backgroundColor: '#10b981',
-                    marginLeft: '12px' 
+                    marginLeft: '12px'
                   }}>
                     {filteredMemos.length}/{memos.length}
                   </span>

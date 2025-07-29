@@ -197,15 +197,16 @@ export const compactMemoMetaStyle: CSSProperties = {
 
 // 新增展示区域样式
 export const memoDisplayAreaStyle: CSSProperties = {
-    backgroundColor: lightColors.surface,
-    border: `1px solid ${lightColors.border}`,
-    borderRadius: '10px',
-    padding: '16px',
-    marginTop: '16px',
-    maxHeight: '420px',
-    minHeight: '300px',
-    overflowY: 'auto',
-    position: 'relative'
+  backgroundColor: lightColors.surface,
+  border: `1px solid ${lightColors.border}`,
+  borderRadius: '10px',
+  padding: '16px',
+  marginTop: '16px',
+  flex: 1, // 使用 flex 属性填充可用空间
+  display: 'flex',
+  flexDirection: 'column',
+  overflow: 'auto', // 允许滚动
+  position: 'relative'
 }
 
 export const memoListContainerStyle: CSSProperties = {

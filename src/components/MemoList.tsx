@@ -25,7 +25,12 @@ export default function MemoList({ memos, onUpdateMemo, onDeleteMemo }: MemoList
   }
 
   return (
-    <div>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      height: '100%',
+      overflowY: 'auto'
+    }}>
       {memos.map(memo => (
         <MemoItem
           key={memo.id}
