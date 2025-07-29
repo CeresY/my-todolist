@@ -64,7 +64,8 @@ export default function MemoDisplayArea({
       ...memoDisplayAreaStyle,
       display: 'flex',
       flexDirection: 'column',
-      height: '100%'
+      height: '100%',
+      overflow: 'hidden'
     }}>
       {/* 滚动指示器 */}
       {hasScroll && (
