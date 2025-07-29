@@ -77,13 +77,19 @@ export default function MemoDisplayArea({
         flex: 1,
         display: 'flex',
         flexDirection: 'column',
-        overflow: 'auto' // 允许滚动
+        overflow: 'hidden' // 隐藏溢出内容
       }}>
-        <MemoList
-          memos={memos}
-          onUpdateMemo={onUpdateMemo}
-          onDeleteMemo={onDeleteMemo}
-        />
+        <div style={{
+          flex: 1,
+          overflowY: 'auto', // 允许垂直滚动
+          paddingRight: '8px'
+        }}>
+          <MemoList
+            memos={memos}
+            onUpdateMemo={onUpdateMemo}
+            onDeleteMemo={onDeleteMemo}
+          />
+        </div>
       </div>
       
       {/* 底部统计信息 */}

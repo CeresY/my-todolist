@@ -202,11 +202,11 @@ export const memoDisplayAreaStyle: CSSProperties = {
   borderRadius: '10px',
   padding: '16px',
   marginTop: '16px',
-  flex: 1, // 使用 flex 属性填充可用空间
   display: 'flex',
   flexDirection: 'column',
-  overflow: 'auto', // 允许滚动
-  position: 'relative'
+  overflow: 'hidden', // 隐藏溢出内容
+  position: 'relative',
+  flex: 1 // 使用 flex 属性填充可用空间，但限制在容器内
 }
 
 export const memoListContainerStyle: CSSProperties = {
