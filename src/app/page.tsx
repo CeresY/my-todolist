@@ -100,43 +100,85 @@ export default function Home() {
     maxWidth: 'none',
     maxHeight: 'none',
     display: 'flex',
+    flexDirection: 'row' as const,
+    overflow: 'hidden',
+    boxSizing: 'border-box',
+    padding: '0'
+  }
+
+  // 左侧TAB区域样式
+  const leftTabStyle: CSSProperties = {
+    width: '200px',
+    backgroundColor: '#f8fafc',
+    borderRight: '1px solid #e2e8f0',
+    padding: '20px 0',
+    display: 'flex',
     flexDirection: 'column' as const,
-    overflow: 'hidden', // 隐藏滚动条
-    boxSizing: 'border-box'
+    height: '100%'
+  }
+
+  // 垂直TAB按钮样式
+  const verticalTabButtonStyle: CSSProperties = {
+    ...tabButtonStyle,
+    width: 'calc(100% - 20px)',
+    margin: '0 10px 8px 10px',
+    borderRadius: '8px',
+    textAlign: 'left' as const,
+    padding: '12px 16px',
+    justifyContent: 'flex-start'
+  }
+
+  const verticalActiveTabButtonStyle: CSSProperties = {
+    ...activeTabButtonStyle,
+    width: 'calc(100% - 20px)',
+    margin: '0 10px 8px 10px',
+    borderRadius: '8px',
+    textAlign: 'left' as const,
+    padding: '12px 16px',
+    justifyContent: 'flex-start'
+  }
+
+  // 右侧内容区域样式
+  const rightContentStyle: CSSProperties = {
+    flex: 1,
+    height: '100%',
+    overflow: 'auto',
+    padding: '20px'
   }
 
   const filteredMemos = getFilteredMemos()
 
   return (
         <div style={containerStyle}>
-          <div style={{ marginBottom: '24px' }}>
-            <button 
+          {/* 左侧TAB区域 */}
+          <div style={leftTabStyle}>
+            <button
               onClick={() => setActiveTab('todos')}
-              style={activeTab === 'todos' ? activeTabButtonStyle : tabButtonStyle}
+              style={activeTab === 'todos' ? verticalActiveTabButtonStyle : verticalTabButtonStyle}
             >
               待办事项
               {todos.length > 0 && (
                 <span style={memoCountBadgeStyle}>{todos.length}</span>
               )}
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('memos')}
-              style={activeTab === 'memos' ? activeTabButtonStyle : tabButtonStyle}
+              style={activeTab === 'memos' ? verticalActiveTabButtonStyle : verticalTabButtonStyle}
             >
               备忘录管理
               {memos.length > 0 && (
                 <span style={memoCountBadgeStyle}>{memos.length}</span>
               )}
             </button>
-            <button 
+            <button
               onClick={() => setActiveTab('memoDisplay')}
-              style={activeTab === 'memoDisplay' ? activeTabButtonStyle : tabButtonStyle}
+              style={activeTab === 'memoDisplay' ? verticalActiveTabButtonStyle : verticalTabButtonStyle}
             >
               备忘录展示
               {filteredMemos.length > 0 && (
-                <span style={{ 
-                  ...memoCountBadgeStyle, 
-                  backgroundColor: '#10b981' 
+                <span style={{
+                  ...memoCountBadgeStyle,
+                  backgroundColor: '#10b981'
                 }}>
                   {filteredMemos.length}
                 </span>
@@ -144,6 +186,8 @@ export default function Home() {
             </button>
           </div>
           
+          {/* 右侧内容区域 */}
+          <div style={rightContentStyle}>
           {activeTab === 'todos' && (
             <div style={{
               display: 'flex',
@@ -331,6 +375,7 @@ export default function Home() {
               </div>
             </div>
           )}
+        </div>
         </div>
   );
 }
