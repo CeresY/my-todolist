@@ -8,5 +8,5 @@
 
 src/components/*:组件
 src/app/pages/*:页面
-src/app/api/*:api服务
+src/app/pages/api/*:api服务
 docs/*:文档

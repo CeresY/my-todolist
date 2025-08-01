@@ -2,7 +2,7 @@
 
 import React, { useState } from 'react';
 import { Memo } from '@/types';
-import { updateMemo } from '@/utils/memoUtils';
+import { updateMemo } from '@/lib/memoUtils';
 import { memoItemStyle, tagStyle, priorityStyles, buttonStyle } from '@/styles';
 
 interface MemoItemProps {

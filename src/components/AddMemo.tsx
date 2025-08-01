@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
-import { createMemo } from '@/utils/memoUtils';
+import { createMemo } from '@/lib/memoUtils';
 import { Memo } from '@/types';
 import { buttonStyle, inputStyle, textareaStyle, tagStyle } from '@/styles';
 
