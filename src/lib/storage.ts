@@ -21,6 +21,16 @@ export const loadTodos = (): Todo[] => {
 // Memo storage functions
 export const saveMemos = (memos: Memo[]): void => {
   if (typeof window !== "undefined") {
+
+    // 首先获取现有的备忘录
+    // const existingMemos = loadMemos();
+
+    // console.log('save old Memos:', existingMemos);
+    console.log('save new Memos:', memos);
+
+    // 或者如果你只想添加新的备忘录到现有列表中：
+    // const mergedMemos = [...existingMemos, ...memos];
+
     localStorage.setItem(MEMOS_STORAGE_KEY, JSON.stringify(memos, (key, value) => {
       if (key === 'createdAt' || key === 'updatedAt') {
         return value instanceof Date ? value.toISOString() : value;
@@ -33,6 +43,8 @@ export const saveMemos = (memos: Memo[]): void => {
 export const loadMemos = (): Memo[] => {
   if (typeof window !== "undefined") {
     const stored = localStorage.getItem(MEMOS_STORAGE_KEY);
+    console.log('Load Memos:', stored);
+
     if (stored) {
       const parsed = JSON.parse(stored);
       return parsed.map((memo: any) => ({

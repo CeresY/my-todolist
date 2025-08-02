@@ -21,18 +21,19 @@ export default function Home() {
   const [memoTagFilter, setMemoTagFilter] = useState('')
   const [activeTab, setActiveTab] = useState<'todos' | 'memos' | 'memoDisplay'>('todos')
   
-  useEffect(() => {
-    setTodos(loadTodos())
-    setMemos(loadMemos())
-  }, [])
-  
-  useEffect(() => {
-    saveTodos(todos)
-  }, [todos])
-  
-  useEffect(() => {
-    saveMemos(memos)
-  }, [memos])
+    useEffect(() => {
+      setTodos(loadTodos())
+      setMemos(loadMemos())
+    }, [])
+    
+    useEffect(() => {
+      saveTodos(todos)
+    }, [todos])
+    
+    useEffect(() => {
+      saveMemos(memos)
+    }, [memos])
+
     const addTodo = (text: string) => {
       const newTodo: Todo = {
           id: Math.random(),
@@ -71,6 +72,8 @@ export default function Home() {
     
     const addMemo = (memo: Memo) => {
         setMemos([...memos, memo])
+        console.log('Saving memo:', memo);
+        saveMemos(Array.of(memo))
     }
     
     const updateMemo = (updatedMemo: Memo) => {
