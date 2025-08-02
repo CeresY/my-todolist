@@ -22,16 +22,21 @@ export const loadTodos = (): Todo[] => {
 export const saveMemos = (memos: Memo[]): void => {
   if (typeof window !== "undefined") {
 
-    // 首先获取现有的备忘录
-    // const existingMemos = loadMemos();
+
 
     // console.log('save old Memos:', existingMemos);
-    console.log('save new Memos:', memos);
+    console.log('Add new Memos:', memos);
 
     // 或者如果你只想添加新的备忘录到现有列表中：
     // const mergedMemos = [...existingMemos, ...memos];
 
-    localStorage.setItem(MEMOS_STORAGE_KEY, JSON.stringify(memos, (key, value) => {
+    if (memos.length === 0) {
+      return ;
+    }
+
+    const newMemos = mergeMemos(memos);
+
+    localStorage.setItem(MEMOS_STORAGE_KEY, JSON.stringify(newMemos, (key, value) => {
       if (key === 'createdAt' || key === 'updatedAt') {
         return value instanceof Date ? value.toISOString() : value;
       }
@@ -39,6 +44,26 @@ export const saveMemos = (memos: Memo[]): void => {
     }));
   }
 };
+
+function mergeMemos(newMemos: Memo[]): Memo[] { 
+    const existingMemos = loadMemos();
+    
+    // 基于 ID 合并，避免重复并更新现有项
+    const mergedMemos = [...existingMemos];
+    
+    newMemos.forEach(newMemo => {
+      const existingIndex = mergedMemos.findIndex(memo => memo.id === newMemo.id);
+      if (existingIndex >= 0) {
+        // 更新现有备忘录
+        mergedMemos[existingIndex] = newMemo;
+      } else {
+        // 添加新备忘录
+        mergedMemos.push(newMemo);
+      }
+    });
+
+    return mergedMemos;
+}
 
 export const loadMemos = (): Memo[] => {
   if (typeof window !== "undefined") {

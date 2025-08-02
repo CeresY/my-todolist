@@ -30,9 +30,9 @@ export default function Home() {
       saveTodos(todos)
     }, [todos])
     
-    useEffect(() => {
-      saveMemos(memos)
-    }, [memos])
+    // useEffect(() => {
+    //   saveMemos(memos)
+    // }, [memos])
 
     const addTodo = (text: string) => {
       const newTodo: Todo = {
