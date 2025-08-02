@@ -6,13 +6,13 @@
 ## 测试环境准备
 
 ### 1. 数据库设置
-确保MySQL数据库已安装并运行，创建测试数据库：
+<!-- 确保MySQL数据库已安装并运行，创建测试数据库：
 ```sql
-CREATE DATABASE memo_app_test;
+CREATE DATABASE keep-accounts;
 CREATE USER 'memo_test_user'@'localhost' IDENTIFIED BY 'memo_test_password';
 GRANT ALL PRIVILEGES ON memo_app_test.* TO 'memo_test_user'@'localhost';
 FLUSH PRIVILEGES;
-```
+``` -->
 
 ### 2. 数据库表创建
 在测试数据库中创建所需的表：
@@ -22,8 +22,7 @@ CREATE TABLE todos (
   id INT PRIMARY KEY AUTO_INCREMENT,
   title VARCHAR(255) NOT NULL,
   completed BOOLEAN NOT NULL DEFAULT FALSE,
-  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
+  created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 -- 创建memos表
@@ -32,20 +31,11 @@ CREATE TABLE memos (
   title VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
   priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+  tags JSON,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
 );
 
--- 创建memo_tags表
-CREATE TABLE memo_tags (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  memo_id INT NOT NULL,
-  tag VARCHAR(50) NOT NULL,
-  FOREIGN KEY (memo_id) REFERENCES memos(id) ON DELETE CASCADE,
-  INDEX idx_memo_id (memo_id),
-  INDEX idx_tag (tag)
-);
-```
 
 ### 3. 环境变量配置
 创建`.env.test`文件用于测试环境：

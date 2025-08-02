@@ -21,9 +21,6 @@ export const loadTodos = (): Todo[] => {
 // Memo storage functions
 export const saveMemos = (memos: Memo[]): void => {
   if (typeof window !== "undefined") {
-
-
-
     // console.log('save old Memos:', existingMemos);
     console.log('Add new Memos:', memos);
 
