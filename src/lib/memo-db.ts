@@ -61,7 +61,7 @@ export async function getAllMemos(): Promise<Memo[]> {
     title: row.title,
     content: row.content,
     priority: row.priority,
-    tags: row.tags && row.tags.length>0 && row.tags.trim() !== '' ? JSON.parse(row.tags) : [],
+    tags: row.tags,
     createdAt: row.created_at,
     updatedAt: row.updated_at
   }));

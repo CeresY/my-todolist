@@ -36,7 +36,17 @@ export default function Home() {
         const result = await response.json()
         
         if (result.success) {
-          setMemos(result.data)
+
+          // 确保日期字段被正确转换为Date对象
+          const memosWithDates = result.data.map((memo: any) => ({
+            ...memo,
+            createdAt: new Date(memo.createdAt),
+            updatedAt: new Date(memo.updatedAt),
+            // 确保tags字段是一个数组，即使是空数组
+            tags: Array.isArray(memo.tags) ? memo.tags : []
+          }));
+
+          setMemos(memosWithDates)
         } else {
           console.error('获取备忘录失败:', result.error)
         }
@@ -82,7 +92,15 @@ export default function Home() {
     }
     
     const addMemo = (memo: Memo) => {
-        setMemos([...memos, memo])
+        // console.log('Adding memo:', memo)
+
+        const newMemo = {
+          ...memo,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
+
+        setMemos([...memos, newMemo])
     }
     
     const updateMemo = (updatedMemo: Memo) => {
