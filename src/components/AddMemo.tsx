@@ -3,7 +3,7 @@
 import React, { useState } from 'react';
 import { createMemo } from '@/lib/memoUtils';
 import { Memo } from '@/types';
-import { buttonStyle, inputStyle, textareaStyle, tagStyle } from '@/styles';
+import { buttonStyle, inputStyle, textareaStyle, tagStyle } from '@/styles/styles';
 
 interface AddMemoProps {
   onAddMemo: (memo: Memo) => void;

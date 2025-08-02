@@ -1,5 +1,5 @@
 import {FormEvent, useState} from "react";
-import { buttonStyle, inputStyle} from "@/styles"
+import { buttonStyle, inputStyle} from "@/styles/styles"
 
 interface AddTodoProps {
     addTodo: (text: string) => void;

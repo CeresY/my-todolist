@@ -7,7 +7,7 @@ import MemoDisplayArea from "@/components/MemoDisplayArea";
 import MemoFilter from "@/components/MemoFilter";
 import {CSSProperties, useState, useEffect} from "react";
 import {Todo, Memo} from "@/types";
-import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle, memoCountBadgeStyle, compactMemoItemStyle, compactMemoTitleStyle, compactMemoContentStyle, compactMemoMetaStyle} from "@/styles";
+import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle, memoCountBadgeStyle, compactMemoItemStyle, compactMemoTitleStyle, compactMemoContentStyle, compactMemoMetaStyle} from "@/styles/styles";
 import {saveTodos, loadTodos, saveMemos, loadMemos} from "@/lib/storage";
 import {filterMemosBySearch, filterMemosByPriority, filterMemosByTag, getAllTags} from "@/lib/memoUtils";
 

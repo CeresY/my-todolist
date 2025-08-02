@@ -1,5 +1,5 @@
 import {CSSProperties, useState} from "react";
-import { buttonStyle} from "@/styles"
+import { buttonStyle} from "@/styles/styles"
 
 const divStyle: CSSProperties = {
     display: 'flex',

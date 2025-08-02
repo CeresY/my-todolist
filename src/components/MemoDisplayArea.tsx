@@ -4,7 +4,7 @@ import React from 'react';
 import { Memo } from '@/types';
 import MemoItem from './MemoItem';
 import MemoList from './MemoList';
-import { memoDisplayAreaStyle, memoListContainerStyle, scrollIndicatorStyle } from '@/styles';
+import { memoDisplayAreaStyle, memoListContainerStyle, scrollIndicatorStyle } from '@/styles/styles';
 
 interface MemoDisplayAreaProps {
   memos: Memo[];

@@ -1,5 +1,5 @@
 import {Todo} from "@/types";
-import { buttonStyle} from "@/styles"
+import { buttonStyle} from "@/styles/styles"
 
 interface TodoItemProps {
   todo: Todo,

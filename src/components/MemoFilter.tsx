@@ -1,7 +1,7 @@
 "use client";
 
 import React from 'react';
-import { filterButtonStyle, activeFilterButtonStyle, inputStyle, cardStyle } from '@/styles';
+import { filterButtonStyle, activeFilterButtonStyle, inputStyle, cardStyle } from '@/styles/styles';
 
 interface MemoFilterProps {
   searchTerm: string;
