@@ -25,17 +25,9 @@
 | title | VARCHAR(255) | NOT NULL | 备忘录标题 |
 | content | TEXT | NOT NULL | 备忘录内容 |
 | priority | ENUM('low', 'medium', 'high') | DEFAULT 'medium' | 优先级 |
+| tags | JSON |  | 标签信息 |
 | created_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP | 创建时间 |
 | updated_at | TIMESTAMP | NOT NULL, DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP | 更新时间 |
-
-### 3. 备忘录标签表 (memo_tags)
-存储备忘录的标签信息（用于多对多关系）。
-
-| 字段名 | 类型 | 约束 | 描述 |
-|--------|------|------|------|
-| id | INT | PRIMARY KEY, AUTO_INCREMENT | 标签唯一标识 |
-| memo_id | INT | FOREIGN KEY REFERENCES memos(id) ON DELETE CASCADE | 关联的备忘录ID |
-| tag | VARCHAR(50) | NOT NULL | 标签名称 |
 
 ## 索引设计
 
@@ -46,11 +38,6 @@
 ### memos表索引
 - 主键索引: id
 - 默认索引: created_at, updated_at, priority
-
-### memo_tags表索引
-- 主键索引: id
-- 外键索引: memo_id
-- 标签索引: tag
 
 ## SQL创建语句
 
@@ -70,18 +57,9 @@ CREATE TABLE memos (
   title VARCHAR(255) NOT NULL,
   content TEXT NOT NULL,
   priority ENUM('low', 'medium', 'high') DEFAULT 'medium',
+  tags JSON,
   created_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   updated_at TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP
-);
-
--- 创建memo_tags表
-CREATE TABLE memo_tags (
-  id INT PRIMARY KEY AUTO_INCREMENT,
-  memo_id INT NOT NULL,
-  tag VARCHAR(50) NOT NULL,
-  FOREIGN KEY (memo_id) REFERENCES memos(id) ON DELETE CASCADE,
-  INDEX idx_memo_id (memo_id),
-  INDEX idx_tag (tag)
 );
 ```
 
