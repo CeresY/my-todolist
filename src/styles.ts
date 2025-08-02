@@ -156,7 +156,7 @@ export const activeTabButtonStyle: CSSProperties = {
     ...tabButtonStyle,
     backgroundColor: lightColors.primary,
     color: 'white',
-    borderColor: lightColors.primary,
+    border: `1px solid ${lightColors.primary}`,
     boxShadow: '0 2px 4px rgba(59, 130, 246, 0.2)',
     transform: 'translateY(-1px)'
 }
