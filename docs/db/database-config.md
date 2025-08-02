@@ -9,9 +9,9 @@
 # 数据库连接配置
 DB_HOST=localhost
 DB_PORT=3306
-DB_USER=memo_user
-DB_PASSWORD=memo_password
-DB_NAME=memo_app
+DB_USER=root
+DB_PASSWORD=root
+DB_NAME=keep-accounts
 
 # 连接池配置
 DB_CONNECTION_LIMIT=10

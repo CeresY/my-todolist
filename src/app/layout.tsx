@@ -4,8 +4,10 @@ import "./globals.css";
 
 const inter = Inter({ subsets: ["latin"] });
 
+const appName = process.env.NEXT_PUBLIC_APP_NAME
+
 export const metadata: Metadata = {
-    title: "TodoList & 备忘录",
+    title: `${appName}`,
     description: "高效的任务管理和备忘录应用",
   };
 
