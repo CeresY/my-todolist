@@ -78,6 +78,7 @@ export default function Home() {
     
     const updateMemo = (updatedMemo: Memo) => {
         setMemos(memos.map(memo => memo.id === updatedMemo.id ? updatedMemo : memo))
+        saveMemos(Array.of(updatedMemo))
     }
     
     const deleteMemo = (id: number) => {
