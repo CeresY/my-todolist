@@ -3,6 +3,8 @@
 src/components/*:组件
 src/app/pages/*:页面
 src/app/pages/api/*:api服务
+src/lib/*:工具类
+src/styles/*:样式
 
 
 # 设计文稿目录

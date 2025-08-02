@@ -1,7 +1,6 @@
 "use client";
 
 import React, { useState } from 'react';
-import { createMemo } from '@/lib/memoUtils';
 import { Memo } from '@/types';
 import { buttonStyle, inputStyle, textareaStyle, tagStyle } from '@/styles/styles';
 
@@ -15,7 +14,7 @@ export default function AddMemo({ onAddMemo }: AddMemoProps) {
   const [tagsInput, setTagsInput] = useState('');
   const [priority, setPriority] = useState<'low' | 'medium' | 'high'>('medium');
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     if (title.trim() && content.trim()) {
       const tags = tagsInput
@@ -23,13 +22,37 @@ export default function AddMemo({ onAddMemo }: AddMemoProps) {
         .map(tag => tag.trim())
         .filter(tag => tag.length > 0);
       
-      const newMemo = createMemo(title.trim(), content.trim(), tags.length > 0 ? tags : undefined, priority);
-      onAddMemo(newMemo);
-      
-      setTitle('');
-      setContent('');
-      setTagsInput('');
-      setPriority('medium');
+      try {
+        const response = await fetch('/api/memos', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            title: title.trim(),
+            content: content.trim(),
+            priority,
+            tags: tags.length > 0 ? tags : undefined
+          }),
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          onAddMemo(result.data);
+          
+          setTitle('');
+          setContent('');
+          setTagsInput('');
+          setPriority('medium');
+        } else {
+          console.error('创建备忘录失败:', result.error);
+          alert('创建备忘录失败: ' + result.error.message);
+        }
+      } catch (error) {
+        console.error('创建备忘录失败:', error);
+        alert('创建备忘录失败: 网络错误');
+      }
     }
   };
 

@@ -23,16 +23,27 @@ export default function Home() {
   
     useEffect(() => {
       setTodos(loadTodos())
-      setMemos(loadMemos())
+      loadMemosFromAPI()
     }, [])
     
     useEffect(() => {
       saveTodos(todos)
     }, [todos])
     
-    // useEffect(() => {
-    //   saveMemos(memos)
-    // }, [memos])
+    const loadMemosFromAPI = async () => {
+      try {
+        const response = await fetch('/api/memos')
+        const result = await response.json()
+        
+        if (result.success) {
+          setMemos(result.data)
+        } else {
+          console.error('获取备忘录失败:', result.error)
+        }
+      } catch (error) {
+        console.error('获取备忘录失败:', error)
+      }
+    }
 
     const addTodo = (text: string) => {
       const newTodo: Todo = {
@@ -72,13 +83,10 @@ export default function Home() {
     
     const addMemo = (memo: Memo) => {
         setMemos([...memos, memo])
-        console.log('Saving memo:', memo);
-        saveMemos(Array.of(memo))
     }
     
     const updateMemo = (updatedMemo: Memo) => {
         setMemos(memos.map(memo => memo.id === updatedMemo.id ? updatedMemo : memo))
-        saveMemos(Array.of(updatedMemo))
     }
     
     const deleteMemo = (id: number) => {

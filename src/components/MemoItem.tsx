@@ -2,7 +2,6 @@
 
 import React, { useState } from 'react';
 import { Memo } from '@/types';
-import { updateMemo } from '@/lib/memoUtils';
 import { memoItemStyle, tagStyle, priorityStyles, buttonStyle } from '@/styles/styles';
 
 interface MemoItemProps {
@@ -18,21 +17,61 @@ export default function MemoItem({ memo, onUpdateMemo, onDeleteMemo }: MemoItemP
   const [editTagsInput, setEditTagsInput] = useState(memo.tags?.join(', ') || '');
   const [editPriority, setEditPriority] = useState(memo.priority || 'medium');
 
-  const handleSave = () => {
+  const handleSave = async () => {
     const tags = editTagsInput
       .split(',')
       .map(tag => tag.trim())
       .filter(tag => tag.length > 0);
     
-    const updatedMemo = updateMemo(memo, {
-      title: editTitle.trim(),
-      content: editContent.trim(),
-      tags: tags.length > 0 ? tags : undefined,
-      priority: editPriority
-    });
-    
-    onUpdateMemo(updatedMemo);
-    setIsEditing(false);
+    try {
+      const response = await fetch(`/api/memos/${memo.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          title: editTitle.trim(),
+          content: editContent.trim(),
+          priority: editPriority,
+          tags: tags.length > 0 ? tags : undefined
+        }),
+      });
+
+      const result = await response.json();
+      
+      if (result.success) {
+        onUpdateMemo(result.data);
+        setIsEditing(false);
+      } else {
+        console.error('更新备忘录失败:', result.error);
+        alert('更新备忘录失败: ' + result.error.message);
+      }
+    } catch (error) {
+      console.error('更新备忘录失败:', error);
+      alert('更新备忘录失败: 网络错误');
+    }
+  };
+
+  const handleDelete = async () => {
+    if (confirm('确定要删除这个备忘录吗？')) {
+      try {
+        const response = await fetch(`/api/memos/${memo.id}`, {
+          method: 'DELETE',
+        });
+
+        const result = await response.json();
+        
+        if (result.success) {
+          onDeleteMemo(memo.id);
+        } else {
+          console.error('删除备忘录失败:', result.error);
+          alert('删除备忘录失败: ' + result.error.message);
+        }
+      } catch (error) {
+        console.error('删除备忘录失败:', error);
+        alert('删除备忘录失败: 网络错误');
+      }
+    }
   };
 
   const handleCancel = () => {
@@ -102,8 +141,8 @@ export default function MemoItem({ memo, onUpdateMemo, onDeleteMemo }: MemoItemP
         <button onClick={handleSave} style={{ ...buttonStyle, marginLeft: '0', marginRight: '8px' }}>
           保存
         </button>
-        <button 
-          onClick={handleCancel} 
+        <button
+          onClick={handleCancel}
           style={{ ...buttonStyle, backgroundColor: '#6b7280' }}
         >
           取消
@@ -117,12 +156,12 @@ export default function MemoItem({ memo, onUpdateMemo, onDeleteMemo }: MemoItemP
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', marginBottom: '12px' }}>
         <h4 style={{ margin: '0', color: '#1f2937', fontSize: '16px', fontWeight: '600' }}>{memo.title}</h4>
         <div>
-          <button 
-            onClick={() => setIsEditing(true)} 
-            style={{ 
-              backgroundColor: '#3b82f6', 
+          <button
+            onClick={() => setIsEditing(true)}
+            style={{
+              backgroundColor: '#3b82f6',
               color: 'white',
-              padding: '6px 12px', 
+              padding: '6px 12px',
               border: 'none',
               borderRadius: '6px',
               fontSize: '12px',
@@ -134,12 +173,12 @@ export default function MemoItem({ memo, onUpdateMemo, onDeleteMemo }: MemoItemP
           >
             编辑
           </button>
-          <button 
-            onClick={() => onDeleteMemo(memo.id)} 
-            style={{ 
-              backgroundColor: '#ef4444', 
+          <button
+            onClick={handleDelete}
+            style={{
+              backgroundColor: '#ef4444',
               color: 'white',
-              padding: '6px 12px', 
+              padding: '6px 12px',
               border: 'none',
               borderRadius: '6px',
               fontSize: '12px',
