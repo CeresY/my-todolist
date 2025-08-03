@@ -61,7 +61,7 @@ export async function getAllMemos(): Promise<Memo[]> {
     title: row.title,
     content: row.content,
     priority: row.priority,
-    tags: row.tags,
+    tags: Array.isArray(row.tags) ? row.tags : [],
     createdAt: row.created_at,
     updatedAt: row.updated_at
   }));
@@ -84,7 +84,7 @@ export async function getMemoById(id: number): Promise<Memo | null> {
     title: row.title,
     content: row.content,
     priority: row.priority,
-    tags: row.tags && row.tags.trim() !== '' ? JSON.parse(row.tags) : [],
+    tags: Array.isArray(row.tags) ? row.tags : [],
     createdAt: row.created_at,
     updatedAt: row.updated_at
   };
