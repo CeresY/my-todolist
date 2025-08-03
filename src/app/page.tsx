@@ -187,6 +187,46 @@ export default function Home() {
   }
 
   const filteredMemos = getFilteredMemos()
+    
+    const showContainer = () => {
+        if(activeTab === 'memos') {
+            return <MemoManageView
+                memos={memos}
+                addMemo={addMemo}
+                memoSearchTerm={memoSearchTerm}
+                setMemoSearchTerm={setMemoSearchTerm}
+                memoPriorityFilter={memoPriorityFilter}
+                setMemoPriorityFilter={setMemoPriorityFilter}
+                memoTagFilter={memoTagFilter}
+                setMemoTagFilter={setMemoTagFilter}
+                availableTags={availableTags}
+                deleteMemo={deleteMemo}
+                filteredMemos={filteredMemos}
+            />
+        }
+        else if(activeTab === 'memoDisplay') {
+            return <MemoDisplayView
+                memos={memos}
+                filteredMemos={filteredMemos}
+                memoSearchTerm={memoSearchTerm}
+                setMemoSearchTerm={setMemoSearchTerm}
+                memoPriorityFilter={memoPriorityFilter}
+                setMemoPriorityFilter={setMemoPriorityFilter}
+                memoTagFilter={memoTagFilter}
+                setMemoTagFilter={setMemoTagFilter}
+                availableTags={availableTags}
+                updateMemo={updateMemo}
+                deleteMemo={deleteMemo}
+            />
+        }
+        return <TodoView
+            addTodo={addTodo}
+            getFilteredTodos={getFilteredTodos}
+            deleteTodo={deleteTodo}
+            toggleTodo={toggleTodo}
+            setFilter={setFilter}
+        />
+    }
 
   return (
         <div style={containerStyle}>
@@ -227,49 +267,7 @@ export default function Home() {
           </div>
           
           {/* 右侧内容区域 */}
-          <div style={rightContentStyle}>
-            {activeTab === 'todos' && (
-              <TodoView
-                addTodo={addTodo}
-                getFilteredTodos={getFilteredTodos}
-                deleteTodo={deleteTodo}
-                toggleTodo={toggleTodo}
-                setFilter={setFilter}
-              />
-            )}
-            
-            {activeTab === 'memos' && (
-              <MemoManageView
-                memos={memos}
-                addMemo={addMemo}
-                memoSearchTerm={memoSearchTerm}
-                setMemoSearchTerm={setMemoSearchTerm}
-                memoPriorityFilter={memoPriorityFilter}
-                setMemoPriorityFilter={setMemoPriorityFilter}
-                memoTagFilter={memoTagFilter}
-                setMemoTagFilter={setMemoTagFilter}
-                availableTags={availableTags}
-                deleteMemo={deleteMemo}
-                filteredMemos={filteredMemos}
-              />
-            )}
-            
-            {activeTab === 'memoDisplay' && (
-              <MemoDisplayView
-                memos={memos}
-                filteredMemos={filteredMemos}
-                memoSearchTerm={memoSearchTerm}
-                setMemoSearchTerm={setMemoSearchTerm}
-                memoPriorityFilter={memoPriorityFilter}
-                setMemoPriorityFilter={setMemoPriorityFilter}
-                memoTagFilter={memoTagFilter}
-                setMemoTagFilter={setMemoTagFilter}
-                availableTags={availableTags}
-                updateMemo={updateMemo}
-                deleteMemo={deleteMemo}
-              />
-            )}
-          </div>
+          <div style={rightContentStyle}>{showContainer()}</div>
         </div>
   );
 }
