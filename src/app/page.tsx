@@ -1,19 +1,12 @@
 "use client"
-import AddTodo from "@/components/AddTodo";
-import TodoList from "@/components/TodoList";
-import TodoFilter from "@/components/TodoFilter";
-import AddMemo from "@/components/AddMemo";
-import MemoDisplayArea from "@/components/MemoDisplayArea";
-import MemoFilter from "@/components/MemoFilter";
 import TodoView from "@/components/TodoView";
 import MemoManageView from "@/components/MemoManageView";
 import MemoDisplayView from "@/components/MemoDisplayView";
-import {CSSProperties, useState, useEffect} from "react";
-import {Todo, Memo} from "@/types";
-import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle, memoCountBadgeStyle, compactMemoItemStyle, compactMemoTitleStyle, compactMemoContentStyle, compactMemoMetaStyle} from "@/styles/styles";
-import {saveTodos, loadTodos, saveMemos, loadMemos} from "@/lib/storage";
-import {filterMemosBySearch, filterMemosByPriority, filterMemosByTag, getAllTags} from "@/lib/memoUtils";
-import { Console } from "console";
+import {CSSProperties, useEffect, useState} from "react";
+import {Memo, Todo} from "@/types";
+import {activeTabButtonStyle, centerDiv, memoCountBadgeStyle, tabButtonStyle} from "@/styles/styles";
+import {loadTodos, saveTodos} from "@/lib/storage";
+import {filterMemosByPriority, filterMemosBySearch, filterMemosByTag, getAllTags} from "@/lib/memoUtils";
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])

@@ -7,7 +7,7 @@ const divStyle: CSSProperties = {
     margin: '10px 0',
 }
 
-const activeColor = '#4caf50', inactiveColor = '#c3c6c7';
+const activeColor = '#3B82F6', inactiveColor = '#c3c6c7';
 
 function TodoFilter({setFilter}:any) {
     const [focus, setFocus] = useState<string>('')

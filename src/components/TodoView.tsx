@@ -1,9 +1,8 @@
 import AddTodo from "@/components/AddTodo";
 import TodoList from "@/components/TodoList";
 import TodoFilter from "@/components/TodoFilter";
-import { CSSProperties } from "react";
-import { Todo } from "@/types";
-import { headingStyle } from "@/styles/styles";
+import {Todo} from "@/types";
+import {headingStyle} from "@/styles/styles";
 
 interface TodoViewProps {
   addTodo: (text: string) => void;
