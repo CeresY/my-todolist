@@ -106,12 +106,12 @@ export default function Home() {
     
     const updateMemo = (updatedMemo: Memo) => {
       console.log('Updating memo:', updatedMemo);
-        const memoToUpdate = {
-          ...updateMemo,
-          createdAt: new Date(),
+        const memoToUpdate: Memo = {
+          ...updatedMemo,
+          createdAt: updatedMemo.createdAt ? new Date(updatedMemo.createdAt) : new Date(),
           updatedAt: new Date()
         }
-        setMemos(memos.map(memo => memo.id === updatedMemo.id ? updatedMemo : memo))
+      setMemos(memos.map(memo => memo.id === memoToUpdate.id ? memoToUpdate : memo))
     }
     
     const deleteMemo = (id: number) => {
