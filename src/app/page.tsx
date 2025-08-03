@@ -10,6 +10,7 @@ import {Todo, Memo} from "@/types";
 import {centerDiv, headingStyle, tabButtonStyle, activeTabButtonStyle, memoCountBadgeStyle, compactMemoItemStyle, compactMemoTitleStyle, compactMemoContentStyle, compactMemoMetaStyle} from "@/styles/styles";
 import {saveTodos, loadTodos, saveMemos, loadMemos} from "@/lib/storage";
 import {filterMemosBySearch, filterMemosByPriority, filterMemosByTag, getAllTags} from "@/lib/memoUtils";
+import { Console } from "console";
 
 export default function Home() {
   const [todos, setTodos] = useState<Todo[]>([])
@@ -104,6 +105,12 @@ export default function Home() {
     }
     
     const updateMemo = (updatedMemo: Memo) => {
+      console.log('Updating memo:', updatedMemo);
+        const memoToUpdate = {
+          ...updateMemo,
+          createdAt: new Date(),
+          updatedAt: new Date()
+        }
         setMemos(memos.map(memo => memo.id === updatedMemo.id ? updatedMemo : memo))
     }
     
